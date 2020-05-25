@@ -22,7 +22,7 @@ export const typeDefs = gql`
   }
   # Type definition of resolvers
   type Query {
-    hello: [Book]
+    books: [Book]
   }
 `;
 
