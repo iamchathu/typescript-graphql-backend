@@ -1,0 +1,22 @@
+{
+  "name": "typescript-graphql-backend",
+  "version": "1.0.0",
+  "description": "TypeScript GraphQL Backend with MongoDB",
+  "main": "dist/index.js",
+  "repository": "https://github.com/iamchathu/typescript-graphql-backend.git",
+  "author": "Chathu Vishwajith <iam@chathu.me>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn src/index.ts"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.9.3"
+  },
+  "engines": {
+    "node": ">= 10.3"
+  },
+  "private": true
+}
