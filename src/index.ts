@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import setupDatabase from './config/mongoose';
 import { typeDefs, resolvers } from './schema';
 
 const setupServer = async () => {
@@ -12,6 +13,8 @@ const setupServer = async () => {
   });
 
   server.applyMiddleware({ app });
+
+  await setupDatabase();
 
   app.listen({ port: 4000 }, () =>
     console.log(

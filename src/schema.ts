@@ -1,34 +1,27 @@
 import { gql } from 'apollo-server-express';
-
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-    year: 1998,
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-    year: 1990,
-  },
-];
+import Books from './models/book';
 
 export const typeDefs = gql`
   # Type definition for Book
   type Book {
-    title: String
+    id: ID
+    isbn: String
+    name: String
     author: String
     year: Int
   }
   # Type definition of resolvers
   type Query {
     books: [Book]
+    bookById(id: String!): Book
   }
 `;
 
 export const resolvers = {
   // Resolver implementation
   Query: {
-    books: () => books,
+    books: async () => await Books.find(),
+    bookById: async (parent: any, { id }: any, context: any, info: any) =>
+      await Books.findById(id),
   },
 };
