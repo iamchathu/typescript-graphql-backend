@@ -5,19 +5,19 @@ import Books from '../models/book';
 const books = [
   {
     isbn: '9789602744017',
-    title: 'Harry Potter and the Chamber of Secrets',
+    name: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
     year: 1998,
   },
   {
     isbn: '9780345370778',
-    title: 'Jurassic Park',
+    name: 'Jurassic Park',
     author: 'Michael Crichton',
     year: 1990,
   },
   {
     isbn: '9781400079179',
-    title: 'The Da Vinci Code',
+    name: 'The Da Vinci Code',
     author: 'Dan Brown',
     year: 2003,
   },
