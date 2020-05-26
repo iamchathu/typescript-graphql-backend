@@ -21,7 +21,6 @@ export const resolvers = {
   // Resolver implementation
   Query: {
     books: async () => await Books.find(),
-    bookById: async (parent: any, { id }: any, context: any, info: any) =>
-      await Books.findById(id),
+    bookById: async (_: any, { id }: any) => await Books.findById(id),
   },
 };
