@@ -1,15 +1,24 @@
 import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import path from 'path';
 import setupDatabase from './config/mongoose';
-import { typeDefs, resolvers } from './schema';
 
 const setupServer = async () => {
   const app = express();
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema: await buildSchema({
+      resolvers: [
+        path.resolve(
+          __dirname,
+          `graphql/resolvers/*.${
+            process.env.NODE_ENV !== 'production' ? 'ts' : 'js'
+          }`,
+        ),
+      ],
+    }),
   });
 
   server.applyMiddleware({ app });

@@ -1,6 +1,6 @@
 import setupDatabase from '../config/mongoose';
 import mongoose from '../config/mongoose';
-import Books from '../models/book';
+import Books from '../graphql/types/book';
 
 const books = [
   {
