@@ -1,5 +1,28 @@
-import { Resolver, Query, Arg } from 'type-graphql';
+import {
+  Resolver,
+  Query,
+  Arg,
+  Mutation,
+  Field,
+  Int,
+  InputType,
+} from 'type-graphql';
 import Books, { Book } from '../types/book';
+
+@InputType()
+class NewBookInput implements Partial<Book> {
+  @Field()
+  isbn: string;
+
+  @Field()
+  name: string;
+
+  @Field(() => Int)
+  year: number;
+
+  @Field()
+  author: string;
+}
 
 @Resolver()
 export class BookResolver {
@@ -14,4 +37,7 @@ export class BookResolver {
     const book = await Books.findById(id);
     return book;
   }
+
+  @Mutation(() => Book)
+  async addBook() {}
 }
