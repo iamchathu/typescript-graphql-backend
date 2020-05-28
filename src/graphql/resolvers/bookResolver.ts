@@ -26,7 +26,7 @@ class NewBookInput implements Partial<Book> {
 
 @Resolver()
 export class BookResolver {
-  @Query(() => [Book])
+  @Query(() => [Book], { nullable: true })
   async books(): Promise<Book[]> {
     const books = await Books.find();
     return books;
@@ -38,6 +38,9 @@ export class BookResolver {
     return book;
   }
 
-  @Mutation(() => Book)
-  async addBook() {}
+  @Mutation(() => Book, { nullable: true })
+  async addBook(@Arg('input') input: NewBookInput): Promise<Book> {
+    const book = await Books.create(input);
+    return book;
+  }
 }
