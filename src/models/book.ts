@@ -1,5 +1,11 @@
-import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
-import { ObjectType, Field, Int, ID } from 'type-graphql';
+import {
+  prop,
+  getModelForClass,
+  modelOptions,
+  Ref,
+} from '@typegoose/typegoose';
+import { ObjectType, Field, Int, ID, FieldResolver } from 'type-graphql';
+import { Author } from './author';
 
 @modelOptions({ schemaOptions: { timestamps: true } })
 @ObjectType()
@@ -15,9 +21,8 @@ export class Book {
   @prop()
   name: string;
 
-  @Field()
-  @prop()
-  author: string;
+  @prop({ ref: Author })
+  authorId: Ref<Author>;
 
   @Field(() => Int)
   @prop()
@@ -27,4 +32,6 @@ export class Book {
   createdAt: Date;
 }
 
-export default getModelForClass(Book);
+const Books = getModelForClass(Book);
+
+export default Books;

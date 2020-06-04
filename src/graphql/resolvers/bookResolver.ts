@@ -6,8 +6,11 @@ import {
   Field,
   Int,
   InputType,
+  FieldResolver,
+  Root,
 } from 'type-graphql';
-import Books, { Book } from '../types/book';
+import Books, { Book } from '../../models/book';
+import Authors, { Author } from '../../models/author';
 
 @InputType()
 class NewBookInput implements Partial<Book> {
@@ -24,8 +27,14 @@ class NewBookInput implements Partial<Book> {
   author: string;
 }
 
-@Resolver()
+@Resolver(() => Book)
 export class BookResolver {
+  @FieldResolver(() => Author)
+  async author(@Root() book: any) {
+    const author = await Authors.findById(book.authorId);
+    return author;
+  }
+
   @Query(() => [Book], { nullable: true })
   async books(): Promise<Book[]> {
     const books = await Books.find();
